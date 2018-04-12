@@ -1,0 +1,101 @@
+swagger: '2.0'
+info:
+  title: MagnetSpace API
+  description: Definition of MagnetSpace user interfaces
+  version: 1.0.0
+host: localhost
+schemes:
+  - http
+produces:
+  - application/json
+paths:
+  /user/{userId}:
+    get:
+      operationId: loadUserById
+      summary: Fetch User
+      description: Fetch one stored user by Id from database
+      parameters:
+        - username: userId
+          description: specific dummy id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/User'
+        404:
+          description: User not found
+    delete:
+      operationId: deleteUserById
+      summary: Fetch User
+      description: Delete one stored user by Id from database
+      parameters:
+        - username: userId
+          description: specific user id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        204:
+          description: Successfull
+        404:
+          description: User not found
+  /user:
+    get:
+      operationId: loadAllUser
+      summary: Fetch users
+      description: Fetch all stored user from database
+      responses:
+        200:
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+    post:
+      operationId: register
+      summary: Register  a user
+      description: Endpoint for registering a user
+      parameters:
+        - username: user
+          in: body
+          description: Request for registering a user
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - user
+      consumes:
+        - application/json
+      responses:
+        200:
+          description: User added successfully
+          schema:
+            $ref: '#/definitions/User'
+        409:
+          description: User already exists
+
+  /app:
+    get:
+      operationId: checkApplication
+      responses:
+        200:
+          schema:
+            type: string
+
+definitions:
+  User:
+    type: object
+    properties:
+      userId:
+        type: integer
+        format: int64
+        required: true
+      username:
+        type: string
+        required: true
+      password:
+        type: string
+        required: true

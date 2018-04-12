@@ -1,0 +1,35 @@
+version: '3'
+
+networks:
+  webnet:
+    driver: bridge
+  dbnet:
+    driver: bridge
+
+services:
+  spring:
+    image: userservice-springboot:latest
+    ports:
+      - 8222:8080
+    depends_on:
+      - db
+    networks:
+      - webnet
+      - dbnet
+    environment:
+      - spring_profiles_active=prod
+      - POSTGRES_PASSWORD=postgres@123
+      - POSTGRES_USER=postgres
+      - POSTGRES_URL=jdbc:postgresql://docker_db_1:5432/userdb
+
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    networks:
+      - dbnet
+    environment:
+      - POSTGRES_PASSWORD=postgres@123
+      - POSTGRES_USER=postgres
+      - POSTGRES_INIT=userdata
+      - POSTGRES_DB=userdb

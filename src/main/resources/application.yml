@@ -1,0 +1,25 @@
+spring:
+    application:
+      username: user-service
+
+    datasource:
+      url: jdbc:postgresql://192.168.99.100:5432/userdb
+      platform: POSTGRESQL
+      username: postgres
+      password: postgres@123
+
+    jpa:
+      generate-ddl: false
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        show_sql: true
+        generate-ddl: false
+        ddl-auto: create-drop
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      properties.hibernate.temp.use_jdbc_metadata_defaults: false
+
+
+server:
+  port: 8222

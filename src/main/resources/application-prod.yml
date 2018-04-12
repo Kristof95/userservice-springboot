@@ -1,0 +1,19 @@
+spring:
+    datasource:
+      url: "${POSTGRES_URL}"
+      platform: POSTGRESQL
+      username: "${POSTGRES_USER}"
+      password: "${POSTGRES_PASSWORD}"
+
+    jpa:
+      generate-ddl: false
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        show_sql: true
+        ddl-auto: none
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      properties.hibernate.temp.use_jdbc_metadata_defaults: false
+server:
+  port: 8080

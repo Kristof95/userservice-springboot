@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: postgres
+      changes:
+        - createDatabase:
+            databaseName: userdb
+  - changeSet:
+      id: 2
+      author: postgres
+      changes:
+        - createTable:
+            tableName: userdata
+            columns:
+              - column:
+                  name: user_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_name
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_password
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 3
+      author: postgres
+      changes:
+        - insert:
+            tableName: userdata
+            columns:
+              - column:
+                  name: user_id
+                  value: 0
+              - column:
+                  name: user_name
+                  value: testuser
+              - column:
+                  name: user_password
+                  value: gu3stPassw0rd
