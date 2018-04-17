@@ -7,3 +7,5 @@ Just run: sh deploy.sh
 Liquibase create database schema, table and insert a test user into the table
 
 ### Database Postgresql
+
+<!--Comment-->
